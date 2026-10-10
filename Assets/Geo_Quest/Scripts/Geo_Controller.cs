@@ -1,54 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Geo_Controller : MonoBehaviour
 {
+    public int variable1 = 2;
     // Start is called before the first frame update
     private string Var2 = "Hello";
     int varOne = 5;
     private Rigidbody2D rb;
-    
-   
+    public string nextLevel = "Lvl2";
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Debug.Log(Var2 + "World");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            rb.velocity = new Vector2(1, rb.velocity.y);
-        }
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            rb.velocity = new Vector2(-1, rb.velocity.y);
-        }
-       
-    }
-         /*
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            transform.position += new Vector3(1, 0, 0);
-        }
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            transform.position += new Vector3(0, -2, 0);
-        }
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            transform.position += new Vector3(-1, 0, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            transform.position += new Vector3(0, 2, 0);
-        }
-        Debug.Log(varOne);
-        varOne++;*/
-    
-}
-       
 
+        {
+            float xInput = Input.GetAxis("Horizontal");
+            xInput *= variable1;
+            rb.velocity = new Vector2(xInput, rb.velocity.y);
+            //Debug.Log(xInput);
+        }
+    }
+    /*
+   if (Input.GetKeyDown(KeyCode.W))
+   {
+       transform.position += new Vector3(1, 0, 0);
+   }
+   if(Input.GetKeyDown(KeyCode.E))
+   {
+       transform.position += new Vector3(0, -2, 0);
+   }
+   if(Input.GetKeyDown(KeyCode.D))
+   {
+       transform.position += new Vector3(-1, 0, 0);
+   }
+   if (Input.GetKeyDown(KeyCode.S))
+   {
+       transform.position += new Vector3(0, 2, 0);
+   }
+   Debug.Log(varOne);
+   varOne++;*/
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.tag)
+            {
+               case "Death":
+                   {
+                    string thisLevel = SceneManager.GetActiveScene().name;
+                    SceneManager.LoadScene(thisLevel);
+                    break;
+                   }
+               case "Finish":
+                {
+                    SceneManager.LoadScene(nextLevel);
+                    break;
+                }
+    
+            }
+    }
+}
