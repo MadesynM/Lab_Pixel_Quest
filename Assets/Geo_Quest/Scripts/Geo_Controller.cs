@@ -10,13 +10,16 @@ public class Geo_Controller : MonoBehaviour
     private string Var2 = "Hello";
     int varOne = 5;
     private Rigidbody2D rb;
+    private SpriteRenderer _spriteRenderer;
+    public float xMultiplier = 4;
     public string nextLevel = "Lvl2";
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Debug.Log(Var2 + "World");
+        _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer >();
+       // Debug.Log(Var2 + "World");
 
     }
 
@@ -25,10 +28,12 @@ public class Geo_Controller : MonoBehaviour
     {
 
         {
-            float xInput = Input.GetAxis("Horizontal");
-            xInput *= variable1;
-            rb.velocity = new Vector2(xInput, rb.velocity.y);
+            float xMovement = Input.GetAxis("Horizontal");
+            xMovement *= variable1;
+            rb.velocity = new Vector2(xMovement, rb.velocity.y);
             //Debug.Log(xInput);
+            if (xMovement < 0) { _spriteRenderer.flipX = false;}
+            else if (xMovement > 0) { _spriteRenderer.flipX = true;}
         }
     }
     /*
