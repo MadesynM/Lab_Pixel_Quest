@@ -27,7 +27,7 @@ public class Geo_Controller : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer >();
+        _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
        // Debug.Log(Var2 + "World");
 
     }
