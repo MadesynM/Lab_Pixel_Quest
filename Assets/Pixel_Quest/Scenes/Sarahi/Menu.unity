@@ -634,7 +634,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 863584102}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1848472908}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &863584102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,7 +712,7 @@ RectTransform:
   m_GameObject: {fileID: 902239319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7.0854673, y: 3.975611, z: 7.0854673}
+  m_LocalScale: {x: 6.2712765, y: 3.5187736, z: 6.2712765}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1135550683}
@@ -1024,7 +1036,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 330.3, y: 178.6}
+  m_AnchoredPosition: {x: 290.2, y: 156.7}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413306291
@@ -1252,6 +1264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1848472907}
+  - component: {fileID: 1848472908}
   m_Layer: 0
   m_Name: MenuController
   m_TagString: Untagged
@@ -1274,6 +1287,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1848472908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848472906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae9f138c5ce0234db23a74a82f2110f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startScene: CharacterSelectScene
 --- !u!1 &2138938753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,7 +1382,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2138938756}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1848472908}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2138938756
 MonoBehaviour:
   m_ObjectHideFlags: 0

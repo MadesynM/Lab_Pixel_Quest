@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Geo_Quest/Scenes/Lvl. 2.unity
     guid: 3728d80d1bf0c464da8d33e4f1e6fe91
+  - enabled: 1
+    path: Assets/Pixel_Quest/Scenes/Sarahi/CharacterSelectScene.unity
+    guid: 69713d9a5feb5f44aaa030e182ccc118
   m_configObjects: {}
