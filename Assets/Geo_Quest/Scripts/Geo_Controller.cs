@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+
 
 public class Geo_Controller : MonoBehaviour
 {
@@ -20,7 +19,8 @@ public class Geo_Controller : MonoBehaviour
     public float CapsuleRadius = 0.08f;
     public int maxHealth = 3;
     private int currentHealth = 3;
-    public Image healthBar; 
+    public Image healthBar;
+    
 
     // Ground Chek 
     public Transform rightcollider;
@@ -28,7 +28,9 @@ public class Geo_Controller : MonoBehaviour
     public LayerMask groundMask; 
     public float jumpForce = 5f;
     private GameObject grabbedObject;
+    private Object collision;
 
+    //public int CoinCounter = 1;
 
 
     void Start()
@@ -57,7 +59,7 @@ public class Geo_Controller : MonoBehaviour
         }
         Collider2D left = Physics2D.OverlapCapsule(leftcollider.position, new Vector2(CapsuleHeight, CapsuleRadius), CapsuleDirection2D.Horizontal,
     0, groundMask);
-
+        Destroy(collision);
 
         if (left != null)
         {
@@ -108,6 +110,10 @@ public class Geo_Controller : MonoBehaviour
                    {
                     currentHealth--;
                     healthBar.fillAmount = (float)currentHealth / maxHealth;
+                    if (currentHealth <= 0)
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    }
                     break;
                     
 
@@ -126,6 +132,8 @@ public class Geo_Controller : MonoBehaviour
                 {
                     SceneManager.LoadScene(nextLevel);
                     break;
+
+                    
                 }
     
             }
