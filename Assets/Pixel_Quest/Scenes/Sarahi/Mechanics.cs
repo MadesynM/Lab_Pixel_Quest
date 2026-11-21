@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private int coinCounter = 0;
+    private int _health = 3;
+    private int _maxHealth = 3;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        switch (collision.tag)
+        {
+            case "Finish":
+                {
+                    coinCounter++;
+                    Destroy(collision.gameObject);
+                    break;
+                }
+            case "Health":
+                {
+                    _health++;
+                    Destroy(collision.gameObject);
+                    break;
+                }
+        }
     }
 }
