@@ -11,7 +11,7 @@ public class Geo_Controller : MonoBehaviour
     private string Var2 = "Hello";
     int varOne = 5;
     private Rigidbody2D rb;
-    private SpriteRenderer _spriteRenderer;
+    public SpriteRenderer _spriteRenderer;
     public float xMultiplier = 4;
     public string nextLevel = "Lvl2";
     // Capsule
@@ -36,7 +36,7 @@ public class Geo_Controller : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
        // Debug.Log(Var2 + "World");
 
     }
