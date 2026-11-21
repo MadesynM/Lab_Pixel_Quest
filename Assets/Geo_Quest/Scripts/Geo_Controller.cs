@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,12 +14,20 @@ public class Geo_Controller : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     public float xMultiplier = 4;
     public string nextLevel = "Lvl2";
+    // Capsule
+    public float CapsuleHeight = 0.25f; 
+    public float CapsuleRadius = 0.08f;
 
+    // Ground Chek 
+    public Transform feetCollider;
+    public LayerMask groundMask; 
+    public float jumpForce = 5f;
+    private GameObject grabbedObject;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer >();
+        _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
        // Debug.Log(Var2 + "World");
 
     }
@@ -26,15 +35,32 @@ public class Geo_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Checks if player is touching ground
+        Collider2D  hit = Physics2D.OverlapCapsule(feetCollider.position, new Vector2(CapsuleHeight, CapsuleRadius), CapsuleDirection2D.Horizontal,
+            0, groundMask);
 
+
+        if (hit != null)
         {
-            float xMovement = Input.GetAxis("Horizontal");
+            grabbedObject = hit.gameObject;
+            if(Input.GetKeyDown(KeyCode.H))
+            {
+                Destroy(grabbedObject.gameObject);
+            }
+        }
+        // Checks if player is trying to jump/can jump
+        if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.velocity = new Vector2 (rb.velocity.x, jumpForce);
+        }
+
+        float xMovement = Input.GetAxis("Horizontal");
             xMovement *= variable1;
             rb.velocity = new Vector2(xMovement, rb.velocity.y);
             //Debug.Log(xInput);
             if (xMovement < 0) { _spriteRenderer.flipX = false;}
             else if (xMovement > 0) { _spriteRenderer.flipX = true;}
-        }
+        
     }
     /*
    if (Input.GetKeyDown(KeyCode.W))
