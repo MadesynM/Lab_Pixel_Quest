@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Geo_Controller : MonoBehaviour
 {
@@ -17,12 +18,18 @@ public class Geo_Controller : MonoBehaviour
     // Capsule
     public float CapsuleHeight = 0.25f; 
     public float CapsuleRadius = 0.08f;
+    public int maxHealth = 3;
+    private int currentHealth = 3;
+    public Image healthBar; 
 
     // Ground Chek 
-    public Transform feetCollider;
+    public Transform rightcollider;
+    public Transform leftcollider;
     public LayerMask groundMask; 
     public float jumpForce = 5f;
     private GameObject grabbedObject;
+
+
 
     void Start()
     {
@@ -36,14 +43,26 @@ public class Geo_Controller : MonoBehaviour
     void Update()
     {
         // Checks if player is touching ground
-        Collider2D  hit = Physics2D.OverlapCapsule(feetCollider.position, new Vector2(CapsuleHeight, CapsuleRadius), CapsuleDirection2D.Horizontal,
+        Collider2D  right = Physics2D.OverlapCapsule(rightcollider.position, new Vector2(CapsuleHeight, CapsuleRadius), CapsuleDirection2D.Horizontal,
             0, groundMask);
 
 
-        if (hit != null)
+        if (right != null)
         {
-            grabbedObject = hit.gameObject;
+            grabbedObject = right.gameObject;
             if(Input.GetKeyDown(KeyCode.H))
+            {
+                Destroy(grabbedObject.gameObject);
+            }
+        }
+        Collider2D left = Physics2D.OverlapCapsule(leftcollider.position, new Vector2(CapsuleHeight, CapsuleRadius), CapsuleDirection2D.Horizontal,
+    0, groundMask);
+
+
+        if (left != null)
+        {
+            grabbedObject = left.gameObject;
+            if (Input.GetKeyDown(KeyCode.H))
             {
                 Destroy(grabbedObject.gameObject);
             }
@@ -87,10 +106,22 @@ public class Geo_Controller : MonoBehaviour
             {
                case "Death":
                    {
-                    string thisLevel = SceneManager.GetActiveScene().name;
-                    SceneManager.LoadScene(thisLevel);
+                    currentHealth--;
+                    healthBar.fillAmount = (float)currentHealth / maxHealth;
                     break;
-                   }
+                    
+
+                }
+            case "Health":
+                {
+                     if (currentHealth < maxHealth)
+                    {
+                        currentHealth++;
+                        healthBar.fillAmount = (float)currentHealth / maxHealth;
+                    }
+                    Destroy(collision.gameObject);
+                    break;
+                }
                case "Finish":
                 {
                     SceneManager.LoadScene(nextLevel);
